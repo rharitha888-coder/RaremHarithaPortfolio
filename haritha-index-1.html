@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rarem Haritha — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a1a2e;
+    --paper:#f6f0f2;
+    --paper-dim:#ecdfe4;
+    --line:#7a4a63;
+    --line-soft:#a56b85;
+    --rose:#c8548f;
+    --amber:#d98c3f;
+    --muted:#7d6570;
+    --white:#fffbfc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+  .grid-bg{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(var(--line-soft) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, var(--line-soft) 0.5px, transparent 0.5px);
+    background-size:32px 32px;opacity:0.07;
+  }
+  .wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 28px;}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0;flex-wrap:wrap;gap:12px;}
+  .logo{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.5px;color:var(--ink);border:1px solid var(--ink);padding:6px 10px;}
+  nav a{color:var(--muted);text-decoration:none;font-size:13.5px;margin-left:22px;font-family:'JetBrains Mono',monospace;transition:color .2s;}
+  nav a:hover{color:var(--rose);}
+  nav .links{display:flex;align-items:center;flex-wrap:wrap;}
+
+  header.hero{padding:70px 0 60px;display:grid;grid-template-columns:1fr 220px;gap:40px;align-items:center;}
+  @media(max-width:760px){header.hero{grid-template-columns:1fr;}}
+  .photo-frame{
+    width:200px;height:200px;border-radius:50%;overflow:hidden;
+    border:2px solid var(--ink);box-shadow:8px 8px 0 var(--paper-dim), 8px 8px 0 1px var(--ink);
+    justify-self:end;
+  }
+  @media(max-width:760px){.photo-frame{justify-self:start;width:150px;height:150px;}}
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--rose);letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--rose);display:inline-block;}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.1rem, 5vw, 3.2rem);line-height:1.08;letter-spacing:-1px;max-width:640px;}
+  h1 .accent{color:var(--amber);font-style:italic;font-weight:600;}
+  .hero-sub{margin-top:22px;max-width:560px;font-size:16px;line-height:1.65;color:var(--line);}
+  .hero-actions{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:12px 22px;text-decoration:none;border-radius:2px;letter-spacing:0.3px;transition:transform .15s ease, box-shadow .15s ease;display:inline-block;}
+  .btn-primary{background:var(--ink);color:var(--white);}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--amber);}
+  .btn-ghost{border:1px solid var(--ink);color:var(--ink);}
+  .btn-ghost:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--rose);}
+
+  section{padding:56px 0;position:relative;}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:34px;}
+  .section-num{font-family:'JetBrains Mono',monospace;color:var(--rose);font-size:14px;}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.6rem;}
+  .section-line{flex:1;height:1px;background:var(--line-soft);opacity:0.4;}
+
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{font-size:15px;line-height:1.75;color:var(--line);margin-bottom:16px;}
+  .about-text strong{color:var(--ink);}
+
+  .board{border:1px solid var(--line-soft);padding:22px;background:rgba(255,255,255,0.4);}
+  .board-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
+  .chip-group{margin-bottom:16px;}
+  .chip-group:last-child{margin-bottom:0;}
+  .chip-group-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);margin-bottom:8px;letter-spacing:0.5px;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--ink);padding:4px 9px;background:var(--white);}
+
+  table.edu{width:100%;border-collapse:collapse;font-size:14px;}
+  table.edu th{font-family:'JetBrains Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);}
+  table.edu td{padding:12px;border-bottom:1px dotted rgba(122,74,99,0.3);color:var(--line);vertical-align:top;}
+  table.edu td.course{color:var(--ink);font-weight:600;font-family:'Space Grotesk',sans-serif;}
+
+  .achieve-item{display:flex;gap:12px;padding:12px 0;font-size:14.5px;line-height:1.6;color:var(--line);border-top:1px dotted rgba(122,74,99,0.25);}
+  .achieve-item:first-child{border-top:none;}
+  .achieve-marker{color:var(--amber);font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+
+  footer{padding:70px 0 50px;border-top:1px solid rgba(122,74,99,0.3);}
+  .footer-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.6vw,2.2rem);margin-bottom:22px;max-width:600px;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px;}
+  .footer-note{margin-top:50px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.show{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none;}}
+  ::selection{background:var(--rose);color:var(--white);}
+  a:focus-visible, .btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<div class="wrap">
+  <nav>
+    <div class="logo">R.HARITHA</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#activities">Activities</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">B.Tech EEE · Class of 2027</div>
+      <h1>Learning by <span class="accent">doing</span>, one project at a time.</h1>
+      <p class="hero-sub">Final-year Electrical &amp; Electronics Engineering student looking to put my training to work and keep growing — every project is a chance to learn something from the people around me.</p>
+      <div class="hero-actions">
+        <a href="#skills" class="btn btn-primary">View skills</a>
+        <a href="mailto:rharitha888@gmail.com" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="photo-frame"><img src="haritha-profile.jpg" alt="Rarem Haritha"></div>
+  </header>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-head">
+      <span class="section-num">01</span><span class="section-title">Skills</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p><strong>B.Tech Electrical &amp; Electronics Engineering</strong>, SV College of Engineering, Tirupati — graduating 2027.</p>
+        <p>My core coursework is electrical engineering, but I've been building a parallel foundation in programming and data — starting with C and Python, and branching into web basics, databases, and a first look at machine learning through MATLAB.</p>
+      </div>
+      <div class="board reveal">
+        <div class="board-label">// Technical skills</div>
+        <div class="chip-group">
+          <div class="chip-group-label">LANGUAGES</div>
+          <div class="chips"><span class="chip">C</span><span class="chip">Python</span><span class="chip">Java</span><span class="chip">SQL</span></div>
+        </div>
+        <div class="chip-group">
+          <div class="chip-group-label">WEB &amp; DATA</div>
+          <div class="chips"><span class="chip">HTML</span><span class="chip">SQL</span></div>
+        </div>
+        <div class="chip-group">
+          <div class="chip-group-label">PLATFORMS &amp; AI</div>
+          <div class="chips"><span class="chip">ServiceNow Administrator</span><span class="chip">AI Fundamentals (IBM)</span><span class="chip">MATLAB</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-head">
+      <span class="section-num">02</span><span class="section-title">Education</span>
+      <div class="section-line"></div>
+    </div>
+    <table class="edu reveal">
+      <tr><th>Course</th><th>Institution</th><th>Board/University</th><th>Year</th><th>Score</th></tr>
+      <tr>
+        <td class="course">B.Tech (EEE)</td>
+        <td>SV College of Engineering, Tirupati</td>
+        <td>JNTUA</td>
+        <td>2027</td>
+        <td>87.5%</td>
+      </tr>
+      <tr>
+        <td class="course">Intermediate (MPC)</td>
+        <td>Aim's Junior College, Tirupati</td>
+        <td>Board of Intermediate Education, AP</td>
+        <td>2022</td>
+        <td>70.0%</td>
+      </tr>
+      <tr>
+        <td class="course">S.S.C</td>
+        <td>Dr. SRK High School, Tirupati</td>
+        <td>Board of Secondary Education, AP</td>
+        <td>2020</td>
+        <td>100%</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities">
+    <div class="section-head">
+      <span class="section-num">03</span><span class="section-title">Co-curricular activities</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="reveal">
+      <div class="achieve-item"><span class="achieve-marker">→</span>Completed a virtual internship program with a certificate from ServiceNow University.</div>
+      <div class="achieve-item"><span class="achieve-marker">→</span>Completed a fundamentals of Artificial Intelligence course with IBM.</div>
+      <div class="achieve-item"><span class="achieve-marker">→</span>Completed a community service project on Smart Illumination — power-efficient LED lighting for public infrastructure.</div>
+      <div class="achieve-item"><span class="achieve-marker">→</span>Completed HTML training with Simplilearn SkillUp.</div>
+      <div class="achieve-item"><span class="achieve-marker">→</span>Completed a MATLAB course on Machine Learning.</div>
+    </div>
+  </section>
+
+  <!-- TRAITS -->
+  <section id="traits">
+    <div class="section-head">
+      <span class="section-num">04</span><span class="section-title">How I work</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="board reveal">
+      <div class="chips">
+        <span class="chip">Team &amp; time management</span>
+        <span class="chip">Positive thinking</span>
+        <span class="chip">Planning &amp; organizing</span>
+        <span class="chip">Quick learner</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact">
+    <div class="section-head">
+      <span class="section-num">05</span><span class="section-title">Get in touch</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="footer-title reveal">Open to opportunities where I can learn and contribute.</div>
+    <div class="contact-row reveal">
+      <a href="mailto:rharitha888@gmail.com" class="btn btn-primary">rharitha888@gmail.com</a>
+      <a href="tel:+919618354272" class="btn btn-ghost">+91 96183 54272</a>
+      <a href="https://www.linkedin.com/in/haritha-r-9039a03a6" class="btn btn-ghost">LinkedIn</a>
+    </div>
+    <div class="footer-note">Built with HTML, CSS &amp; JS.</div>
+  </footer>
+</div>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
